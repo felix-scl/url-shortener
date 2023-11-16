@@ -6,7 +6,7 @@ export default function Header() {
       <a
         href='/'
         className='font-bold font-bungee text-4xl text-white'
-        aria-hidden={true}
+        aria-label='Home button'
       >
         URLSh...
       </a>
