@@ -1,6 +1,10 @@
-import { type FormEvent } from 'react';
+import { RefObject, type FormEvent } from 'react';
 
-export default function ShortenURLForm() {
+export default function ShortenURLForm({
+  inputRef,
+}: {
+  inputRef: RefObject<HTMLInputElement>;
+}) {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement);
@@ -29,6 +33,7 @@ export default function ShortenURLForm() {
           name='full-url'
           className='w-full rounded-lg p-4 border border-slate-200 text-base md:text-lg'
           placeholder='Enter your link here'
+          ref={inputRef}
         />
       </div>
       <button

@@ -13,7 +13,7 @@ interface ShortURL {
   createdAt: string;
 }
 
-export default function MyURLs() {
+export default function MyURLs({ focusInput }: { focusInput: () => void }) {
   const [shortURLs, setShortURLs] = useState<ShortURL[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -62,7 +62,10 @@ export default function MyURLs() {
       <div className='bg-white rounded-lg p-4 text-xl space-y-2 md:w-4/6 lg:w-3/6 mx-auto'>
         <h2 className='text-2xl'>My URLs</h2>
         <div className='border border-slate-200 rounded-lg p-4 cursor-default flex items-center justify-center font-mono'>
-          <button className='bg-yellow-500 rounded-badge py-1 px-4 text-white font-bold tracking-widest hocus:bg-yellow-600 transition-colors duration-200'>
+          <button
+            className='bg-yellow-500 rounded-badge py-1 px-4 text-white font-bold tracking-widest hocus:bg-yellow-600 transition-colors duration-200'
+            onClick={focusInput}
+          >
             Short a URL
           </button>
         </div>
