@@ -4,35 +4,10 @@ import {
   ClipboardIcon,
   TrashIcon,
 } from '@heroicons/react/24/outline';
-import { useEffect, useState } from 'react';
-
-interface ShortURL {
-  full: string;
-  short: string;
-  clicks: number;
-  createdAt: string;
-}
+import useShortURL from '../hooks/useShortURL';
 
 export default function MyURLs({ focusInput }: { focusInput: () => void }) {
-  const [shortURLs, setShortURLs] = useState<ShortURL[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const getShortUrls = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch('http://localhost:8800/');
-        const result: ShortURL[] = await response.json();
-        setShortURLs(result);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getShortUrls();
-  }, []);
+  const { shortURLs, loading } = useShortURL();
 
   if (loading) {
     return (
