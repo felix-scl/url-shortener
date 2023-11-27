@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
 interface ShortURL {
-  full: string;
-  short: string;
+  originalUrl: string;
+  shortId: string;
   clicks: number;
   createdAt: string;
 }

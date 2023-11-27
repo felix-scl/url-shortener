@@ -6,27 +6,29 @@ import {
 } from '@heroicons/react/24/outline';
 
 interface ShortURL {
-  full: string;
-  short: string;
+  originalUrl: string;
+  shortId: string;
   clicks: number;
   createdAt: string;
+}
+
+interface ShortURLItemProps {
+  shortURL: ShortURL;
+  shortDate: string;
 }
 
 export default function ShortURLItem({
   shortURL,
   shortDate,
-}: {
-  shortURL: ShortURL;
-  shortDate: string;
-}) {
+}: ShortURLItemProps) {
   return (
     <li className='border border-slate-200 rounded-lg p-4 space-y-4'>
       <div>
         <div className='flex justify-between items-center'>
-          <h3 className='text-lg'>urlsh.netlify.app/{shortURL.short}</h3>
+          <h3 className='text-lg'>urlsh.netlify.app/{shortURL.shortId}</h3>
         </div>
         <p className='text-green-600 text-base cursor-default'>
-          {shortURL.full}
+          {shortURL.originalUrl}
         </p>
       </div>
 
@@ -38,7 +40,7 @@ export default function ShortURLItem({
         </div>
         <div className='flex gap-2 flex-wrap lg:flex-nowrap text-sm lg:text-base'>
           <a
-            href={`http://localhost:8800/${shortURL.short}`}
+            href={`http://localhost:8800/${shortURL.shortId}`}
             className='bg-green-500 text-white hocus:bg-green-400 rounded-md py-1 px-2 flex items-center transition-colors duration-100 md:tooltip'
             data-tip='Visit URL'
             aria-label='Visit URL'

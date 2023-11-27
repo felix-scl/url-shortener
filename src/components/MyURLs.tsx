@@ -54,7 +54,7 @@ export default function MyURLs({ focusInput }: { focusInput: () => void }) {
           );
           return (
             <ShortURLItem
-              key={shortURL.short}
+              key={shortURL.shortId}
               shortURL={shortURL}
               shortDate={shortDate}
             />
