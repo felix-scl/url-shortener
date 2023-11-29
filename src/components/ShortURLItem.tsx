@@ -1,6 +1,5 @@
 import {
   ArrowTopRightOnSquareIcon,
-  PencilIcon,
   ClipboardIcon,
   TrashIcon,
 } from '@heroicons/react/24/outline';
@@ -48,14 +47,6 @@ export default function ShortURLItem({
             <span>Visit&nbsp;</span>
             <ArrowTopRightOnSquareIcon className='w-4 h-4 lg:w-5 lg:h-5' />
           </a>
-          <button
-            className='bg-orange-500 text-white hocus:bg-orange-400 rounded-md py-1 px-2 flex items-center transition-colors duration-100 md:tooltip'
-            data-tip='Edit shorten URL'
-            aria-label='Edit shorten URL'
-          >
-            <span>Edit&nbsp;</span>
-            <PencilIcon className='w-4 h-4 lg:w-5 lg:h-5' />
-          </button>
           <button
             className='bg-sky-500 text-white hocus:bg-sky-400 rounded-md py-1 px-2 flex items-center transition-colors duration-100 md:tooltip'
             data-tip='Copy shorten URL to clipboard'
