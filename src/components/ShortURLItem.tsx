@@ -3,6 +3,8 @@ import {
   ClipboardIcon,
   TrashIcon,
 } from '@heroicons/react/24/outline';
+import { useCopyToClipboard } from '../hooks/useCopyToClipboard';
+import { useState } from 'react';
 
 interface ShortURL {
   originalUrl: string;
@@ -20,6 +22,17 @@ export default function ShortURLItem({
   shortURL,
   shortDate,
 }: ShortURLItemProps) {
+  const [, copyToClipboard] = useCopyToClipboard();
+  const [isCopied, setIsCopied] = useState(false);
+
+  const handleCopyBtn = () => {
+    setIsCopied(true);
+    copyToClipboard(`http://localhost:8800/${shortURL.shortId}`);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 1000);
+  };
+
   return (
     <li className='border border-slate-200 rounded-lg p-4 space-y-4'>
       <div>
@@ -47,18 +60,26 @@ export default function ShortURLItem({
             <span>Visit&nbsp;</span>
             <ArrowTopRightOnSquareIcon className='w-4 h-4 lg:w-5 lg:h-5' />
           </a>
-          <button
-            className='bg-sky-500 text-white hocus:bg-sky-400 rounded-md py-1 px-2 flex items-center transition-colors duration-100 md:tooltip'
-            data-tip='Copy shorten URL to clipboard'
-            aria-label='Copy shorten URL to clipboard'
-          >
-            <span>Copy&nbsp;</span>
-            <ClipboardIcon className='w-4 h-4 lg:w-5 lg:h-5' />
-          </button>
+          {isCopied ? (
+            <button className='bg-yellow-500 text-white hocus:bg-yellow-400 rounded-md py-1 px-2 flex items-center transition-colors duration-100'>
+              <span>Copied!&nbsp;</span>
+              <ClipboardIcon className='w-4 h-4 lg:w-5 lg:h-5' />
+            </button>
+          ) : (
+            <button
+              className='bg-sky-500 text-white hocus:bg-sky-400 rounded-md py-1 px-2 flex items-center transition-colors duration-100 md:tooltip'
+              data-tip='Copy shortened URL to clipboard'
+              aria-label='Copy shortened URL to clipboard'
+              onClick={handleCopyBtn}
+            >
+              <span>Copy&nbsp;</span>
+              <ClipboardIcon className='w-4 h-4 lg:w-5 lg:h-5' />
+            </button>
+          )}
           <button
             className='bg-red-500 text-white hocus:bg-red-400 rounded-md py-1 px-2 flex items-center transition-colors duration-100 md:tooltip'
-            data-tip='Delete shorten URL'
-            aria-label='Delete shorten URL'
+            data-tip='Delete shortened URL'
+            aria-label='Delete shortened URL'
           >
             <span>Delete&nbsp;</span>
             <TrashIcon className='w-4 h-4 lg:w-5 lg:h-5' />
