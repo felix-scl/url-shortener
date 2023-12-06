@@ -10,7 +10,7 @@ export default function ShortenURLForm({
     const form = new FormData(e.target as HTMLFormElement);
     const fullUrl = form.get('full-url') as string;
 
-    const res = await fetch('http://localhost:8800/shortenUrl', {
+    const response = await fetch('http://localhost:8800/shortenUrl', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -18,7 +18,9 @@ export default function ShortenURLForm({
       body: JSON.stringify({ fullUrl }),
     });
 
-    if (res.ok) window.location.href = '/';
+    const result = await response.json();
+
+    if (result.ok) window.location.href = '/';
   };
 
   return (
