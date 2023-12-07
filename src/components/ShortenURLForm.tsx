@@ -1,26 +1,18 @@
 import { RefObject, type FormEvent } from 'react';
+import useShortURL from '../hooks/useShortURL';
 
 export default function ShortenURLForm({
   inputRef,
 }: {
   inputRef: RefObject<HTMLInputElement>;
 }) {
+  const { addShortUrl } = useShortURL();
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement);
     const fullUrl = form.get('full-url') as string;
-
-    const response = await fetch('http://localhost:8800/shortenUrl', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ fullUrl }),
-    });
-
-    const result = await response.json();
-
-    if (result.ok) window.location.href = '/';
+    addShortUrl(fullUrl);
   };
 
   return (

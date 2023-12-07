@@ -28,5 +28,19 @@ export default function useShortURL() {
     getShortUrls();
   }, []);
 
-  return { shortURLs, loading };
+  const addShortUrl = async (fullUrl: string) => {
+    const response = await fetch('http://localhost:8800/shortenUrl', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ fullUrl }),
+    });
+
+    const result = await response.json();
+
+    if (result.ok) window.location.href = '/';
+  };
+
+  return { shortURLs, loading, addShortUrl };
 }
